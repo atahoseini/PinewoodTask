@@ -2,7 +2,7 @@
 
 ## Overview
 
-PinewoodTask is a sample application demonstrating the use of ASP.NET Core Web API with Entity Framework Core and Razor Pages. The application features a customer management system with both API endpoints and a Razor-based UI. The project also includes a Dapper-based repository for relational database operations.
+PinewoodTask is a sample application demonstrating the use of ASP.NET Core Web API with Entity Framework Core and Razor Pages. The application features a simple crud system on a customer table with both API endpoints and a Razor-based UI. The project also includes a Dapper-based repository for relational database operations.
 
 ## Project Structure
 
@@ -13,17 +13,20 @@ The API layer provides RESTful endpoints for managing customers. This layer is b
 The Core layer contains the business logic and entity definitions. It includes:
 - **Entities**: Definitions of data models (e.g., `Customer`).
 - **DTOs**: Data Transfer Objects for transferring data between layers.
-- **Interfaces**: Interface definitions for services and repositories.
-
+- **Database Context**: EF Core database context definition for InMemory database.
+- **FluentAPIConfiguration** : Tables configs
+  
 ### 3. Application
 The Application layer implements the business logic and services. It includes:
 - **Services**: Implementations of business logic using repositories.
 - **Mappings**: AutoMapper configurations for mapping between entities and DTOs.
+- **Interfaces**: Interface definitions for services and repositories.
 
 ### 4. Infrastructure
 The Infrastructure layer handles data access and repository implementations. It includes:
 - **Repositories**: Implementations using both Entity Framework Core (InMemory) and Dapper for data access.
-- **Database Context**: EF Core database context definition for InMemory database.
+- **Unit of Work**: Manages transactions and coordinates changes across multiple repositories.
+- **Utility**: Helper classes and utilities for various infrastructure-related tasks.
 
 ### 5. UI
 The UI layer is an ASP.NET Core Razor Pages project providing a web interface for managing customers. It uses Bootstrap for styling.
@@ -36,8 +39,6 @@ The UI layer is an ASP.NET Core Razor Pages project providing a web interface fo
 - **POST /Customer/add**: Add a new customer.
 - **POST /Customer/edit**: Edit an existing customer.
 - **POST /Customer/delete**: Delete a customer by ID.
-
-Swagger documentation is available for all API endpoints when running the API project.
 
 ### 2. Razor Pages
 - **Index**: Display all customers in a table with options to add, edit, and delete.
