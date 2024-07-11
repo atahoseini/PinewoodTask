@@ -1,0 +1,20 @@
+﻿namespace PinewoodTask.Core.Dto
+{
+    public class CustomerDto
+    {
+        public long Id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Phone { get; set; }
+        public string? AddressLine1 { get; set; }
+        public string? AddressLine2 { get; set; }
+        public string? AddressLine3 { get; set; }
+        public string? PostCode { get; set; }
+        public string? City { get; set; }
+        public string? Conty { get; set; }
+        public string? Country { get; set; }
+        public DateTime RegisterDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
+    }
+}
+

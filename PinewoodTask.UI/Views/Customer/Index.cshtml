@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PinewoodTask.Core.Dto.CustomerDto>
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<h1>Customer List</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Add New Customer</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int rowNumber = 1;  
+        }
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@rowNumber</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Phone</td>
+                <td>@customer.City</td>
+                <td>
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@customer.Id">Edit</a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@customer.Id)">Delete</button>
+                </td>
+            </tr>
+            rowNumber++;
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this customer?')) {
+                $.ajax({
+                    url: '@Url.Action("DeleteConfirmed", "Customer")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Customer deleted successfully.');
+                            location.reload();
+                        } else {
+                            alert('Failed to delete the customer.');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to delete the customer.');
+                    }
+                });
+            }
+        }
+    </script>
+}
